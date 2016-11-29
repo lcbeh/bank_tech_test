@@ -20,4 +20,17 @@ describe Event do
     expect(subject.current_balance).to eq 2250
   end
 
+  it "can record the date of an event" do
+    subject.deposit(500)
+    deposit_date = Time.now.strftime("%d/%m/%Y")
+    expect(subject.event_date).to eq deposit_date
+  end
+
+  it "can return a log of an event" do
+    subject.deposit(500)
+    deposit_date = Time.now.strftime("%d/%m/%Y")
+    log = "#{deposit_date} || 500.00     ||            || 3000.00   "
+    expect(subject.event_log).to eq log
+  end
+
 end

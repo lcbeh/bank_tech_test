@@ -19,4 +19,11 @@ describe BankAccount do
     expect(subject.balance).to eq 100
   end
 
+  it "has a record of events" do
+    subject.deposit(500)
+    deposit_date = Time.now.strftime("%d/%m/%Y")
+    log = "#{deposit_date} || 500.00     ||            || 500.00    "
+    expect(subject.events).to eq [log]
+  end
+
 end
