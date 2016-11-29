@@ -1,5 +1,4 @@
 class BankAccount
-
   attr_reader :balance, :events
 
   def initialize (event)
@@ -11,13 +10,13 @@ class BankAccount
   def deposit(amount)
     event = @event.new(@balance)
     @balance = event.deposit(amount)
-    @events << event.event_log
+    log_event(event)
   end
 
   def withdraw(amount)
     event = @event.new(@balance)
     @balance = event.withdraw(amount)
-    @events << event.event_log
+    log_event(event)
   end
 
   def print_statement
@@ -26,6 +25,10 @@ class BankAccount
   end
 
   private
+
+  def log_event(event)
+    @events << event.event_log
+  end
 
   def statement_header
     puts "date".ljust(10) + " || " + "credit".ljust(10) + " || " + "debit".ljust(10) + " || " + "balance".ljust(10)
