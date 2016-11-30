@@ -18,17 +18,13 @@ class Transaction
   end
 
   def transaction_log
-    format_value
-    @formatted_transaction_date + " || " + @formatted_credit + " || " + @formatted_debit + " || " + @formatted_current_balance
+    format_data
   end
 
   private
 
-  def format_value
-    @formatted_credit = format_number(@credit)
-    @formatted_debit = format_number(@debit)
-    @formatted_current_balance = format_number(@current_balance)
-    @formatted_transaction_date = @transaction_date.ljust(10)
+  def format_data
+    [@transaction_date.ljust(10),format_number(@credit),format_number(@debit), format_number(@current_balance)].join(" || ")
   end
 
   def format_number(value)
